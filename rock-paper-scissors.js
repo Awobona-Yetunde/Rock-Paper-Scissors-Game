@@ -6,58 +6,54 @@ let score = JSON.parse(localStorage.getItem("score")) || {
 
 updateScore();
 
-
-
-document.querySelector('.js-auto-play-button').addEventListener('click', () => {
+document.querySelector(".js-auto-play-button").addEventListener("click", () => {
   autoPlay();
-})
+});
 
-  let isAutoPlaying = false;
-  let intervalId;
+let isAutoPlaying = false;
+let intervalId;
 
 function autoPlay() {
-    if(!isAutoPlaying) {
-     intervalId = setInterval(function() {
-        const playerMove = computerMove;
-        playGame(playerMove);
-        isAutoPlaying = true;
-      }, 1000);
-      document.querySelector('.js-auto-play-button').innerHTML = 'Stop Playing';
-    } else {
-        clearInterval(intervalId);
-        isAutoPlaying = false;
-        document.querySelector(".js-auto-play-button").innerHTML =
-          "Auto Play";
-    }
-
+  if (!isAutoPlaying) {
+    intervalId = setInterval(function () {
+      const playerMove = computerMove;
+      playGame(playerMove);
+      isAutoPlaying = true;
+    }, 1000);
+    document.querySelector(".js-auto-play-button").innerHTML = "Stop Playing";
+  } else {
+    clearInterval(intervalId);
+    isAutoPlaying = false;
+    document.querySelector(".js-auto-play-button").innerHTML = "Auto Play";
   }
+}
 
-document.querySelector('.js-rock-button').addEventListener('click', () => {
-  playGame('Rock');
-})
+document.querySelector(".js-rock-button").addEventListener("click", () => {
+  playGame("Rock");
+});
 
 document.querySelector(".js-paper-button").addEventListener("click", () => {
-  playGame('Paper');
+  playGame("Paper");
 });
 
 document.querySelector(".js-scissors-button").addEventListener("click", () => {
-  playGame('Scissors');
+  playGame("Scissors");
 });
 
-document.body.addEventListener('keydown', (event) => {
-  if(event.key === 'r') {
-    playGame('Rock');
-  } else if(event.key === 'p') {
-    playGame('Paper');
-  }else if (event.key === 's') {
-    playGame('Scissors');
-  }else if (event.key === 'a') {
+document.body.addEventListener("keydown", (event) => {
+  if (event.key === "r") {
+    playGame("Rock");
+  } else if (event.key === "p") {
+    playGame("Paper");
+  } else if (event.key === "s") {
+    playGame("Scissors");
+  } else if (event.key === "a") {
     autoPlay();
   }
-})
+});
 
 function playGame(playerMove) {
-  pickComputerMove( );
+  pickComputerMove();
 
   let result = "";
 
@@ -102,8 +98,8 @@ function playGame(playerMove) {
   document.querySelector(".js-result").innerHTML = result;
 
   document.querySelector(".js-moves").innerHTML = `You
-<img src="images/${playerMove}-emoji.png" class="image-icon">
-<img src="images/${computerMove}-emoji.png" class="image-icon">
+<img src="images/${playerMove.toLowerCase()}-emoji.png" class="image-icon">
+<img src="images/${computerMove.toLowerCase()}-emoji.png" class="image-icon">
 Computer`;
 }
 
